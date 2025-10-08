@@ -11,7 +11,9 @@ const corsOptions = {
   methods: ["GET","POST","PUT","DELETE","OPTIONS"],
 };
 
-app.use(cors());
+app.use(cors({
+    origin:["https://bizdateup-todos.onrender.com","http://localhost:5173"]
+}));
 
 app.use('/api', todoRouter);
 
