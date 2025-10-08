@@ -29,19 +29,22 @@ const editTodos = async (req, res) => {
         if (!title || !description || !status || !id) return res.status(400).json({ message: 'Fields are missing' })
 
         const result = await updateTodos(id, title, description, status);
-        return res.status(200).json({ message: 'Todo updated successfully', result, success: true })
+        const updated = result[0]
+        return res.status(200).json({ message: 'Todo updated successfully', updated, success: true })
     } catch (error) {
         return res.status(500).json({ message: '"Internal server error"' })
     }
 }
 
 const editTodoStatus = async (req, res) => {
+
     const { status } = req.body;
     const id = req.params.id;
     try {
         if (!status || !id) return res.status(400).json({ message: 'Fields are missing' })
         const result = await updateStatus(id, status)
         const updated = result[0]
+        console.log(updated)
         return res.status(200).json({ message: 'Todo status updated', updated });
     } catch (error) {
         return res.status(500).json({ message: 'Internal server error' });

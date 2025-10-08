@@ -9,6 +9,7 @@ const useTodoStore = create((set, get) => ({
     isLoadingTodos: false,
     isEditing: false,
 
+    setEditing: (data) => set({ isEditing: data }),
     createTodo: async (data) => {
         set({ isCreating: true })
         try {
@@ -40,7 +41,8 @@ const useTodoStore = create((set, get) => ({
 
     editTodoStatus: async (id, status) => {
         try {
-            const response = await axios.patch(`${api}/${id}`, { status })
+            console.log(id,status)
+            const response = await axios.patch(`${api}/status/${id}`, { status })
             const updatedTodo = response.data.updated;
             console.log(updatedTodo)
             const currentTodos = get().todos
@@ -53,15 +55,16 @@ const useTodoStore = create((set, get) => ({
         }
     },
 
-    editTodo: async (data) => {
+    updateTodo: async (data) => {
         //check the response from the backend
         set({ isEditing: true })
         try {
+            console.log(data)
             const response = await axios.patch(`${api}/${data.id}`, data)
             const currentTodos = get().todos;
 
             const newTodos = currentTodos.map(todo =>
-                todo.id === data.id ? response.data.result : todo
+                todo.id === data.id ? response.data.updated : todo
             )
 
             set({ todos: newTodos });

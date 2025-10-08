@@ -4,8 +4,8 @@ const router = require('express').Router()
 
 router.post('/', addTodos)
 router.get('/', getTodos)
-router.put('/:id', editTodos)
-router.patch("/:id",editTodoStatus)
+router.patch('/:id', editTodos)
+router.patch("/status/:id",editTodoStatus)
 router.delete('/:id', removeTodos)
 
 module.exports = router
