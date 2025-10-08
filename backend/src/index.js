@@ -10,11 +10,12 @@ app.use(cors({ origin: "*" }));
 
 app.use('/api', todoRouter);
 
+require('../../frontend/dist')
 
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
+app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.get("*", (_, res) =>
-  res.sendFile(path.resolve(__dirname, "../frontend/dist/index.html"))
+  res.sendFile(path.resolve(__dirname, "../../frontend/dist/index.html"))
 );
 
 
