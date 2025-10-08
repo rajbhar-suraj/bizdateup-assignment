@@ -6,21 +6,23 @@ const todoRouter = require('./routes/todos.route')
 
 const app = express()
 app.use(express.json());
-const corsOptions = {
-  origin: ["https://bizdateup-todos.onrender.com", "http://localhost:5173"],
-  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-};
 
-app.use(cors(corsOptions));
+app.use(cors({
+    origin:["http://localhost:5173"]
+}));
 
 app.use('/api', todoRouter);
 
-app.use(express.static(path.join(__dirname, "../../frontend/dist")));
+const frontendPath = path.join(__dirname, "../../frontend/dist");
 
-app.use((req, res) => {
-  res.sendFile(path.resolve(__dirname, "../../frontend/dist/index.html"));
-});
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(frontendPath))
+
+    app.get(/^\/(?!api).*/, (req, res) => {
+        res.sendFile(path.join(frontendPath, 'index.html'))
+    })
+}
+
 
 app.get('/', (req, res) => {
   res.json({ message: "Test route is working" });

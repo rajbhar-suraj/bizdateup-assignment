@@ -1,0 +1,22 @@
+{
+  "name": "bizdateup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix fronted",
+    "start": "npm start --prefix backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajbhar-suraj/bizdateup-assignment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rajbhar-suraj/bizdateup-assignment/issues"
+  },
+  "homepage": "https://github.com/rajbhar-suraj/bizdateup-assignment#readme"
+}

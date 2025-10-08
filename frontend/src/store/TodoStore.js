@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
-const api = "https://my-backend.onrender.com/api" || "http://localhost:5000/api";
+const api = import.meta.env.MODE === "development" ? "http://localhost:5000/api" : "/api";
 
 const useTodoStore = create((set, get) => ({
     todos: [],
