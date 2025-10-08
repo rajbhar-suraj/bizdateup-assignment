@@ -41,10 +41,8 @@ const useTodoStore = create((set, get) => ({
 
     editTodoStatus: async (id, status) => {
         try {
-            console.log(id,status)
             const response = await axios.patch(`${api}/status/${id}`, { status })
             const updatedTodo = response.data.updated;
-            console.log(updatedTodo)
             const currentTodos = get().todos
             const newTodos = currentTodos.map((todo) =>
                 todo.id === id ? updatedTodo : todo
@@ -56,10 +54,8 @@ const useTodoStore = create((set, get) => ({
     },
 
     updateTodo: async (data) => {
-        //check the response from the backend
         set({ isEditing: true })
         try {
-            console.log(data)
             const response = await axios.patch(`${api}/${data.id}`, data)
             const currentTodos = get().todos;
 

@@ -44,7 +44,6 @@ const editTodoStatus = async (req, res) => {
         if (!status || !id) return res.status(400).json({ message: 'Fields are missing' })
         const result = await updateStatus(id, status)
         const updated = result[0]
-        console.log(updated)
         return res.status(200).json({ message: 'Todo status updated', updated });
     } catch (error) {
         return res.status(500).json({ message: 'Internal server error' });

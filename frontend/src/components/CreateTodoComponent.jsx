@@ -18,7 +18,6 @@ const CreateTodoComponent = () => {
 
     async function todoHandler(e) {
         e.preventDefault()
-        console.log(formData)
         const response = await createTodo(formData)
         if (response.data.success) {
             setFormData({
