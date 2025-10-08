@@ -21,7 +21,7 @@ const Home = () => {
   //storing the filtered todos
   const [filterTodos, setFilterTodos] = useState([])
 
-  
+
   async function editHandler() {
     setEditing(true)
     await updateTodo(editTodo)
@@ -63,8 +63,8 @@ const Home = () => {
   useEffect(() => {
     getTodos()
   }, [])
- 
-  if(isLoadingTodos) return <div className="flex justify-center items-center h-screen"> <Loader /></div>
+
+  if (isLoadingTodos) return <div className="flex justify-center items-center h-screen"> <Loader /></div>
 
   return (
     <div className="flex flex-col justify-center items-center h-[calc(100vh - 64px)] mt-10 space-y-2">
@@ -103,26 +103,36 @@ const Home = () => {
 
       {/* listing filtered todos & listing the todos */}
       {
-        !isEditing && showfilter ? (
-          filterTodos.length > 0 ? (
-            filterTodos.map(todo => (
-              <TodoCard
-                key={`${todo.id}-${todo.created_at}`}
-                todo={todo}
-                onDelete={deleteHandler}
-                onToggleStatus={statusHandler}
-                setEditTodo={setEditTodo}
-                setEditing={setEditing}
-              />
-            ))
-          ) : (
-            <div className="flex justify-center items-center mt-11">
-              <BiTaskX size={50} />
-              <span className="font-medium text-xl">
-                No todos with current status
-              </span>
-            </div>
-          )
+        !isEditing && showfilter ? (filter.length === 0 ? (
+          todos.map(todo => (
+            <TodoCard
+              key={`${todo.id}-${todo.created_at}`}
+              todo={todo}
+              onDelete={deleteHandler}
+              onToggleStatus={statusHandler}
+              setEditTodo={setEditTodo}
+              setEditing={setEditing}
+            />
+          ))
+        ) : filterTodos.length > 0 || filter.length == 0 ? (
+          filterTodos.map(todo => (
+            <TodoCard
+              key={`${todo.id}-${todo.created_at}`}
+              todo={todo}
+              onDelete={deleteHandler}
+              onToggleStatus={statusHandler}
+              setEditTodo={setEditTodo}
+              setEditing={setEditing}
+            />
+          ))
+        ) : (
+          <div className="flex justify-center items-center mt-11">
+            <BiTaskX size={50} />
+            <span className="font-medium text-xl">
+              No todos with current status
+            </span>
+          </div>
+        )
         ) : !isEditing && todos.length > 0 ? (
           todos.map(todo => (
             <TodoCard
