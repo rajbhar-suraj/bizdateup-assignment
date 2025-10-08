@@ -7,13 +7,13 @@ const todoRouter = require('./routes/todos.route')
 const app = express()
 app.use(express.json());
 const corsOptions = {
-  origin: "https://bizdateup-todos.onrender.com", 
+  origin: ["https://bizdateup-todos.onrender.com", "http://localhost:5173"],
   methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-app.use(cors({
-    origin:["https://bizdateup-todos.onrender.com","http://localhost:5173"]
-}));
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); 
 
 app.use('/api', todoRouter);
 
