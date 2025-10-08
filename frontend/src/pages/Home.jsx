@@ -144,7 +144,7 @@ const Home = () => {
               setEditing={setEditing}
             />
           ))
-        ) : (
+        ) : !isEditing &&(
           <div className="flex justify-center items-center mt-11">
             <BiTaskX size={50} />
             <span className="font-medium text-xl">
