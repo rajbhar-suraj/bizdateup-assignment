@@ -5,23 +5,21 @@ const path = require('path')
 const todoRouter = require('./routes/todos.route')
 
 const app = express()
-app.use(express.json())
-app.use(cors({
-    origin:"*"
-}))
+app.use(express.json());
+app.use(cors({ origin: "*" }));
 
-app.use(express.static(path.join(__dirname, "../client/dist")));
+app.use('/api', todoRouter);
+
+
+app.use(express.static(path.join(__dirname, "frontend/dist")));
 app.get("*", (_, res) =>
-  res.sendFile(path.resolve(__dirname, "../client/dist/index.html"))
+  res.sendFile(path.resolve(__dirname, "frontend/dist/index.html"))
 );
 
-app.use('/api',todoRouter)
 
-app.get('/',(req,res)=>{
-    res.json({
-        message:"Test route is working"
-    })
-})
+app.get('/', (req, res) => {
+  res.json({ message: "Test route is working" });
+});
 
 const PORT = process.env.PORT;
 app.listen(PORT,()=>console.log(`Server is running on PORT: ${PORT}`))
