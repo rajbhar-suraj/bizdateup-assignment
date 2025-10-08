@@ -10,8 +10,6 @@ app.use(cors({ origin: "*" }));
 
 app.use('/api', todoRouter);
 
-require('../../frontend/dist')
-
 app.use(express.static(path.join(__dirname, "../../frontend/dist")));
 
 app.get("*", (_, res) =>
