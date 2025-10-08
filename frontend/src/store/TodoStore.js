@@ -2,7 +2,7 @@ import { create } from 'zustand'
 import axios from 'axios'
 import { toast } from 'react-hot-toast'
 
-const api = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const api = import.meta.env.VITE_API_URL || "http://localhost:5000/api" || "https://bizdateup-todos.onrender.com";
 
 const useTodoStore = create((set, get) => ({
     todos: [],
