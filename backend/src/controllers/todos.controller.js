@@ -3,8 +3,8 @@ const { getAllTodos, createTodos, updateTodos, updateStatus, deleteTodos } = req
 
 const getTodos = async (req, res) => {
     try {
-        const todos = await getAllTodos();
-        return res.status(200).json({ message: 'Todos fetched', todos });
+        const result = await getAllTodos();
+        return res.status(200).json({ message: 'Todos fetched', result });
     } catch (error) {
         return res.status(500).json({ message: 'Internal server error' });
     }
@@ -15,7 +15,7 @@ const addTodos = async (req, res) => {
     try {
         if (!title || !description || !status) return res.status(400).json({ message: 'Fields are missing' })
         const result = await createTodos(title, description, status)
-        return res.status(200).json({ message: 'Todo created successfully', result });
+        return res.status(200).json({ message: 'Todo created successfully', result, success: true });
     } catch (error) {
         return res.status(500).json({ message: 'Internal server error' });
     }
@@ -29,7 +29,7 @@ const editTodos = async (req, res) => {
         if (!title || !description || !status || !id) return res.status(400).json({ message: 'Fields are missing' })
 
         const result = await updateTodos(id, title, description, status);
-        return res.status(200).json({ message: 'Todo updated successfully', result })
+        return res.status(200).json({ message: 'Todo updated successfully', result, success: true })
     } catch (error) {
         return res.status(500).json({ message: '"Internal server error"' })
     }
@@ -41,7 +41,8 @@ const editTodoStatus = async (req, res) => {
     try {
         if (!status || !id) return res.status(400).json({ message: 'Fields are missing' })
         const result = await updateStatus(id, status)
-        return res.status(200).json({ message: 'Todo status updated', result });
+        const updated = result[0]
+        return res.status(200).json({ message: 'Todo status updated', updated });
     } catch (error) {
         return res.status(500).json({ message: 'Internal server error' });
     }
