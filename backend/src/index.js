@@ -6,7 +6,12 @@ const todoRouter = require('./routes/todos.route')
 
 const app = express()
 app.use(express.json());
-app.use(cors({ origin: "*" }));
+const corsOptions = {
+  origin: "https://bizdateup-todos.onrender.com", 
+  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+};
+
+app.use(cors(corsOptions));
 
 app.use('/api', todoRouter);
 
